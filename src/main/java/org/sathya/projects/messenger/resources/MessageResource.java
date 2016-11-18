@@ -31,12 +31,14 @@ public class MessageResource {
 			return messageservice.getAllMessagesForYear(year);
 		}
 		if (start > 0 && size > 0) {
-			//this statement doesnt give the first page as the index starts from 0
+			// this statement doesnt give the first page as the index starts
+			// from 0
 			return messageservice.getAllMessagesPaginated(start, size);
 		}
-		/*The following statement gives the first page as well, but doesnt let getallmessages method to be accessed
-		 * if(start>0 && size>0){
-		 * return messageservice.getAllMessagesPaginated(start, size); }
+		/*
+		 * The following statement gives the first page as well, but doesnt let
+		 * getallmessages method to be accessed if(start>=0 && size>=0){ return
+		 * messageservice.getAllMessagesPaginated(start, size); }
 		 */
 		return messageservice.getAllMessages();
 	}
@@ -45,6 +47,7 @@ public class MessageResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Message addMessage(Message message) {
+
 		return messageservice.addMessage(message);
 	}
 
@@ -70,9 +73,9 @@ public class MessageResource {
 	public Message getMessage(@PathParam("messageId") long Id) {
 		return messageservice.getMessage(Id);
 	}
-	
+
 	@Path("/{messageId}/comments")
-	public CommentResource getCommentResource(){
+	public CommentResource getCommentResource() {
 		return new CommentResource();
 	}
 
